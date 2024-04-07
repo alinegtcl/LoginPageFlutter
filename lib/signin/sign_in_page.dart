@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import '../customwidget/custom_button.dart';
 
 class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Time Tracker"),
+        title: const Text("Time Tracker"),
         backgroundColor: Colors.blue[200],
       ),
       body: _desenhaBody(),
@@ -20,7 +22,7 @@ class SignInPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Text(
+          const Text(
             "Sign in",
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -28,132 +30,56 @@ class SignInPage extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          SizedBox(height: 48.0),
-          SizedBox(
-            height: 50.0,
-            child: ElevatedButton(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Image.asset("images/google-logo.png"),
-                  Text(
-                    "Sign in with Google",
-                    style: TextStyle(
-                      color: Colors.black87,
-                      fontSize: 15.0,
-                    ),
-                  ),
-                  Opacity(
-                    /// AQUI!!!!!
-                    opacity: 0.0,
-                    child: Image.asset("images/google-logo.png"),
-                  ),
-                ],
-              ),
-              onPressed: () {},
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-                shape: MaterialStateProperty.all<OutlinedBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(4.0),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+          const SizedBox(height: 48.0),
+          CustomButton(
+            title: "Sign in with Google",
+            color: Colors.white,
+            textColor: Colors.black87,
+            onPressed: () {
+              _showToastMessage("Clicou em botão login com google");
+            },
+            icon: Image.asset("images/google-logo.png"),
           ),
-          SizedBox(height: 8.0),
-          SizedBox(
-            height: 50.0,
-            child: ElevatedButton(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Image.asset("images/facebook-logo.png"),
-                  Text(
-                    "Sign in with Facebook",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15.0,
-                    ),
-                  ),
-                  Opacity(
-                    opacity: 0.0,
-                    child: Image.asset("images/facebook-logo.png"),
-                  ),
-                ],
-              ),
-              onPressed: () {},
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF334D92)),
-                shape: MaterialStateProperty.all<OutlinedBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(4.0),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+          const SizedBox(height: 8.0),
+          CustomButton(
+            title: "Sign in with Facebook",
+            color: const Color(0xFF334D92),
+            textColor: Colors.white,
+            onPressed: () {
+              _showToastMessage("Clicou em botão login com facebook");
+            },
+            icon: Image.asset("images/facebook-logo.png"),
           ),
-
-          SizedBox(height: 8.0),
-          SizedBox(
-            height: 50.0,
-            child: ElevatedButton(
-              child: Text(
-                "Sign in with email",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15.0,
-                ),
-              ),
-              onPressed: () {},
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.teal),
-                shape: MaterialStateProperty.all<OutlinedBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(4.0),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+          const SizedBox(height: 8.0),
+          CustomButton(
+            title: "Sign in with email",
+            color: Colors.teal,
+            textColor: Colors.white,
+            onPressed: () {
+              _showToastMessage("Clicou em botão login por email");
+            },
           ),
-          SizedBox(height: 8.0),
-          Text(
+          const SizedBox(height: 8.0),
+          const Text(
             "or",
             style: TextStyle(fontSize: 14.0, color: Colors.black87),
             textAlign: TextAlign.center,
           ),
-          SizedBox(height: 8.0),
-          SizedBox(
-            height: 50.0,
-            child: ElevatedButton(
-              child: Text(
-                "Go anonymous",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 15.0,
-                ),
-              ),
-              onPressed: () {},
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(Colors.lime),
-                shape: MaterialStateProperty.all<OutlinedBorder>(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(4.0),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+          const SizedBox(height: 8.0),
+          CustomButton(
+            title: "Go anonymous",
+            color: Colors.lime,
+            textColor: Colors.black,
+            onPressed: () {
+              _showToastMessage("Clicou em botão anonimo");
+            },
           ),
         ],
       ),
     );
   }
+
+  void _showToastMessage(String message) => Fluttertoast.showToast(
+        msg: message,
+      );
 }
